@@ -1,1 +1,3 @@
-module.exports = '';
+const ApiKey = '';
+
+export default ApiKey;
