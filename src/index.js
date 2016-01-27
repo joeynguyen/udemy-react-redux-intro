@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import YTSearch from 'youtube-api-search';
@@ -30,8 +31,11 @@ class App extends Component {
     }
 
     render() {
+        // throttles fetching of videos from the API to once every 300 milliseconds
+        const videoSearch = _.debounce((query) => { this.videoSearch(query) }, 300);
+
         return <div>
-            <SearchBar onQueryChange={query => this.videoSearch(query)} />
+            <SearchBar onQueryChange={videoSearch} />
             <VideoDetail video={this.state.selectedVideo}/>
             <VideoList
                 videos={this.state.videos} 
